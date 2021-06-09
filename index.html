@@ -42,9 +42,10 @@
 			];
 			const geometry = new THREE.BoxGeometry(4, 6, 1);
 			const box = new THREE.Mesh( geometry, material );
-			box.rotation.y = .3;
 			scene.add( box );
 
+			camera.position.x = -7;
+			camera.position.y = 6;
 			camera.position.z = 20;
 
 			const controls = new THREE.OrbitControls(camera, renderer.domElement)
@@ -54,12 +55,11 @@
 			controls.minDistance = 5;
 
 			const light = new THREE.SpotLight( 0xffffff, .5 );
-			light.position = (0, 20, 0);
 			light.angle = Math.PI/10;
 			light.distance = 40;
 			camera.add(light);
 			scene.add(camera);
-			const ambLight = new THREE.AmbientLight( 0xb0b0b0 ); // soft white light
+			const ambLight = new THREE.AmbientLight( 0xc0c0c0 ); // soft white light
 			scene.add( ambLight );
 
 			const animate = function () {
