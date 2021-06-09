@@ -20,15 +20,27 @@
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			document.body.appendChild( renderer.domElement );
 			
-			texture = new THREE.CubeTextureLoader()
-			.setPath( 'pics/' )
-			.load( [
-				'front.png', 'right.png',
-				'left.png', 'back.png',
-				'top.png', 'bottom.png',
-			] );
+			var material = [
+				new THREE.MeshToonMaterial({
+					map: new THREE.TextureLoader().load('pics/right.png')
+ 				}),
+				new THREE.MeshToonMaterial({
+					map: new THREE.TextureLoader().load('pics/left.png')
+				}),
+				new THREE.MeshToonMaterial({
+					map: new THREE.TextureLoader().load('pics/top.png')
+				}),
+				new THREE.MeshToonMaterial({
+					map: new THREE.TextureLoader().load('pics/bottom.png')
+				}),
+				new THREE.MeshToonMaterial({
+					map: new THREE.TextureLoader().load('pics/front.png')
+				}),
+				new THREE.MeshToonMaterial({
+					map: new THREE.TextureLoader().load('pics/back.png')
+				})
+			];
 			const geometry = new THREE.BoxGeometry(4, 6, 1);
-			const material = new THREE.MeshBasicMaterial( { envMap: texture } );
 			const box = new THREE.Mesh( geometry, material );
 			box.rotation.y = .3;
 			scene.add( box );
@@ -41,9 +53,8 @@
 			controls.maxDistance = 70;
 			controls.minDistance = 5;
 
-			const light = new THREE.DirectionalLight( 0xffffff, 1 );
-			light.target = box;
-			scene.add(light);
+			const ambLight = new THREE.AmbientLight( 0xb0b0b0 ); // soft white light
+			scene.add( ambLight );
 
 			const animate = function () {
 				requestAnimationFrame( animate );
