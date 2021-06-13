@@ -50,13 +50,14 @@
 
 			const controls = new THREE.OrbitControls(camera, renderer.domElement)
 			controls.enableDamping = true;
-			controls.dampingFactor = .9;
+			controls.dampingFactor = 1.5;
 			controls.maxDistance = 70;
 			controls.minDistance = 5;
 
 			const light = new THREE.SpotLight( 0xffffff, .5 );
+			light.position.z = 20;
 			light.angle = Math.PI/10;
-			light.distance = 40;
+			light.distance = 70;
 			camera.add(light);
 			scene.add(camera);
 			const ambLight = new THREE.AmbientLight( 0xc0c0c0 ); // soft white light
